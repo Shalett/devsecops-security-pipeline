@@ -2,8 +2,9 @@ name: Security Scanning Demo
 
 on:
   push:
-    branches:
+     branches:
       - main
+      - security-test
 
   pull_request:
     branches:
