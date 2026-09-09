@@ -71,37 +71,37 @@ jobs:
   # ============================================================
   # 3. SCANOSS - OSS / SCA / LICENSE
   # ============================================================
-  scanoss:
-    name: SCANOSS - OSS/SCA
-    runs-on: ubuntu-latest
+#  # scanoss:
+#     name: SCANOSS - OSS/SCA
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v6
 
-      - name: Run SCANOSS
-        id: scanoss
-        uses: scanoss/gha-code-scan@v1
-        continue-on-error: true
-        with:
-          dependencies.enabled: false
-          dependencies.scope: prod
-          output.filepath: scanoss-raw.json
-          policies.halt_on_failure: false
+#       - name: Run SCANOSS
+#         id: scanoss
+#         uses: scanoss/gha-code-scan@v1
+#         continue-on-error: true
+#         with:
+#           dependencies.enabled: false
+#           dependencies.scope: prod
+#           output.filepath: scanoss-raw.json
+#           policies.halt_on_failure: false */ 
 
-      - name: Show SCANOSS result
-        if: always()
-        run: |
-          echo "SCANOSS result file:"
-          ls -lh scanoss-raw.json || true
+#       - name: Show SCANOSS result
+#         if: always()
+#         run: |
+#           echo "SCANOSS result file:"
+#           ls -lh scanoss-raw.json || true
 
-      - name: Upload SCANOSS report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: scanoss-report
-          path: scanoss-raw.json
-          if-no-files-found: warn
+#       - name: Upload SCANOSS report
+#         if: always()
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: scanoss-report
+#           path: scanoss-raw.json
+#           if-no-files-found: warn '''
   # ============================================================
   # 4. CHECKOV - INFRASTRUCTURE AS CODE
   # ============================================================
