@@ -68,7 +68,6 @@ jobs:
           name: semgrep-report
           path: semgrep.sarif
 
-
   # ============================================================
   # 3. SCANOSS - OSS / SCA / LICENSE
   # ============================================================
@@ -81,12 +80,19 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run SCANOSS
-        uses: scanoss/code-scan-action@v0
+        id: scanoss
+        uses: scanoss/gha-code-scan@v1
         continue-on-error: true
         with:
           dependencies.enabled: true
           output.filepath: scanoss-raw.json
-          halt_on_error: false
+          policies.halt_on_failure: false
+
+      - name: Show SCANOSS result
+        if: always()
+        run: |
+          echo "SCANOSS result file:"
+          ls -lh scanoss-raw.json || true
 
       - name: Upload SCANOSS report
         if: always()
@@ -94,7 +100,7 @@ jobs:
         with:
           name: scanoss-report
           path: scanoss-raw.json
-
+          if-no-files-found: warn
 
   # ============================================================
   # 4. CHECKOV - INFRASTRUCTURE AS CODE
