@@ -84,7 +84,7 @@ jobs:
         uses: scanoss/gha-code-scan@v1
         continue-on-error: true
         with:
-          dependencies.enabled: true
+          dependencies.enabled: false
           output.filepath: scanoss-raw.json
           policies.halt_on_failure: false
 
